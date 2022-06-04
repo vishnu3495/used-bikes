@@ -1,0 +1,29 @@
+{%extends 'base.html'%}
+{%block body_block%}
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-10">
+        <div class="card text-center">
+  <div class="card-header">
+    {{bike.name}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">NAME:{{bike.name}}</h5>
+    <p class="card-text">REGISTRATION:{{bike.registration}}</p>
+     <p class="card-text">KILOMETERS:{{bike.kilometers}}</p>
+      <p class="card-text">MILEAGE:{{bike.mileage}}</p>
+      <p class="card-text">LOCATION:{{bike.fuel}}</p>
+      <p class="card-text">OWNERS:{{bike.owners}}</p>
+
+
+
+  </div>
+  <div class="card-footer text-muted">
+
+  </div>
+</div>
+    </div>
+    <div class="col-3"></div>
+
+</div>
+{%endblock%}

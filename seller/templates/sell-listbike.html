@@ -1,0 +1,37 @@
+{%extends 'base.html'%}
+{%block body_block%}
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-12">
+        <table class="table">
+            <tr>
+            <th>Name</th>
+            <th>Registration Year</th>
+            <th>Kilometers</th>
+            <th>Mileage</th>
+            <th>Fuel</th>
+            <th>Owners</th>
+                <th>Action</th>
+            </tr>
+            {%for bike in bikes%}
+            <tr>
+                <td>{{bike.name}}</td>
+                <td>{{bike.registration}}</td>
+                <td>{{bike.kilometers}}</td>
+                <td>{{bike.mileage}}</td>
+                <td>{{bike.fuel}}</td>
+                <td>{{bike.owners}}</td>
+
+
+                <td>
+                  <a href="{%url 'seller-detail' bike.id%}" class="btn btn-outline-primary">View</a>
+                  <a href="{%url 'seller-edit' bike.id%}" class="btn btn-outline-success">Edit</a>
+                  <a href="{%url 'seller-delete' bike.id%}" class="btn btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    <div class="col-4"></div>
+</div>
+{%endblock%}
