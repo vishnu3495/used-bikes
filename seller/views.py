@@ -1,8 +1,8 @@
 from django.shortcuts import redirect,render
 from django.urls import reverse_lazy
 from django.views.generic import View,TemplateView,CreateView,DetailView,ListView,UpdateView,DeleteView,FormView
-from seller.forms import BikeForm,LoginForm
-from seller.models import Bikes
+from seller.forms import BikeForm,LoginForm,CompanyProfileForm
+from seller.models import Bikes,CompanyProfile
 
 from seller.forms import SignupForm
 from django.contrib.auth.models import User
@@ -84,3 +84,45 @@ def signout_view(request,*args,**kwargs):
 
 class ChangePasswordView(TemplateView):
     template_name = "changepassword.html"
+    def post(self,request,*args,**kwargs):
+        pwd=request.POST.get("pwd")
+        uname=request.user
+        user=authenticate(request,username=uname,password=pwd)
+        if user:
+            return redirect("password-reset")
+        else:
+            return render(request,self.template_name)
+
+class PasswordResetView(TemplateView):
+    # form_class = PasswordResetForm
+    template_name = "passwordreset.html"
+    def post(self,request,*args,**kwargs):
+        pwd1=request.POST.get("pwd1")
+        pwd2=request.POST.get("pwd2")
+        if pwd1!=pwd2:
+            return render(request,self.template_name,{"msg":"incorrect password"})
+        else:
+            u=User.objects.get(username=request.user)
+            u.set_password(pwd1)
+            u.save()
+            return redirect('signin')
+
+class CompanyProfileView(CreateView):
+    model = CompanyProfile
+    form_class = CompanyProfileForm
+    template_name = "sell-addprofile.html"
+    success_url = reverse_lazy("seller-home")
+
+    def form_valid(self, form):
+        form.instance.user=self.request.user
+        return super().form_valid(form)
+
+class SellViewProfileView(TemplateView):
+    template_name = "sell-profile.html"
+
+class SellProfileEditView(UpdateView):
+    model = CompanyProfile
+    form_class = CompanyProfileForm
+    template_name = "sell-editprofile.html"
+    success_url = reverse_lazy("seller-viewprofile")
+    pk_url_kwarg = "id"

@@ -11,6 +11,10 @@ urlpatterns=[
     path("users/account/signup",views.SignUpView.as_view(),name="seller-signup"),
     path("users/account/signin",views.SignInView.as_view(),name="seller-signin"),
     path("users/account/signout",views.signout_view,name="signout"),
-    path("users/password/change",views.ChangePasswordView.as_view(),name="password-change")
+    path("users/password/change",views.ChangePasswordView.as_view(),name="password-change"),
+    path("users/password/reset",views.PasswordResetView.as_view(),name="password-reset"),
+    path("profile/add",views.CompanyProfileView.as_view(),name="seller-addprofile"),
+    path("profile/detail",views.SellViewProfileView.as_view(),name="seller-viewprofile"),
+    path("profile/edit/<int:id>",views.SellProfileEditView.as_view(),name="seller-editprofile")
 
 ]
