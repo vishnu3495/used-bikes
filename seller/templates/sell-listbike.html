@@ -6,21 +6,26 @@
         <table class="table">
             <tr>
             <th>Name</th>
+                <th>Company</th>
             <th>Registration Year</th>
             <th>Kilometers</th>
             <th>Mileage</th>
             <th>Fuel</th>
             <th>Owners</th>
+                <th>Amount</th>
                 <th>Action</th>
             </tr>
             {%for bike in bikes%}
             <tr>
                 <td>{{bike.name}}</td>
+                <td>{{bike.company.seller.company_name}}</td>
                 <td>{{bike.registration}}</td>
                 <td>{{bike.kilometers}}</td>
                 <td>{{bike.mileage}}</td>
                 <td>{{bike.fuel}}</td>
                 <td>{{bike.owners}}</td>
+                <td>{{bike.amount}}</td>
+
 
 
                 <td>

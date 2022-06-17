@@ -20,11 +20,18 @@ class BikeAddView(CreateView):
     template_name = "sell-addbike.html"
     success_url = reverse_lazy("seller-list")
 
+    def form_valid(self, form):
+        form.instance.company=self.request.user
+        return super().form_valid(form)
+
 
 class ListBikeView(ListView):
     model = Bikes
     template_name = "sell-listbike.html"
     context_object_name = "bikes"
+
+    def get_queryset(self):
+        return Bikes.objects.filter(company=self.request.user)
 
 
 class BikeDetailView(DetailView):

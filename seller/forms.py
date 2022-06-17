@@ -7,7 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 class BikeForm(forms.ModelForm):
     class Meta:
         model=Bikes
-        fields="__all__"
+        exclude=("company","created_date","active_status")
+
 
 class SignupForm(UserCreationForm):
     class Meta:
