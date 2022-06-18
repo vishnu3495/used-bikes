@@ -1,7 +1,8 @@
 from django import forms
 from seller.models import Bikes,CompanyProfile
 
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from seller.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 class BikeForm(forms.ModelForm):
@@ -13,7 +14,7 @@ class BikeForm(forms.ModelForm):
 class SignupForm(UserCreationForm):
     class Meta:
         model=User
-        fields=["first_name","last_name","username","email","password1","password2"]
+        fields=["first_name","last_name","username","email","password1","password2","role","phone"]
 
 class LoginForm(forms.Form):
     username=forms.CharField()

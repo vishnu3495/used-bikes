@@ -1,5 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+class User(AbstractUser):
+    options=(
+        ("seller","seller"),
+        ("buyer","buyer")
+    )
+    role=models.CharField(max_length=150,choices=options,default="candidate")
+    phone=models.CharField(max_length=12,null=True)
 
 class Bikes(models.Model):
     name=models.CharField(max_length=150)

@@ -5,7 +5,9 @@ from seller.forms import BikeForm,LoginForm,CompanyProfileForm
 from seller.models import Bikes,CompanyProfile
 
 from seller.forms import SignupForm
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from seller.models import User
+
 
 from django.contrib.auth import authenticate,login,logout
 
@@ -65,7 +67,7 @@ class SignUpView(CreateView):
     model = User
     form_class = SignupForm
     template_name = "usersignup.html"
-    success_url = reverse_lazy("seller-list")
+    success_url = reverse_lazy("seller-signin")
 
 
 
@@ -81,7 +83,11 @@ class SignInView(FormView):
              user=authenticate(request,username=uname,password=pwd)
              if user:
                  login(request,user)
-                 return redirect("seller-list")
+                 if request.user.role=="seller":
+
+                    return redirect("seller-list")
+                 elif request.user.role=="buyer":
+                     return render(request,"buyer-home.html")
              else:
                  return redirect(request,"login.html",{"form":form})
 
