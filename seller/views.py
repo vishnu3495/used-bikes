@@ -86,7 +86,7 @@ class SignInView(FormView):
                  if request.user.role=="seller":
 
                     return redirect("seller-list")
-                 elif request.user.role=="buyer":
+                 elif request.user.role=="buyers":
                      return render(request,"buyer-home.html")
              else:
                  return redirect(request,"login.html",{"form":form})
